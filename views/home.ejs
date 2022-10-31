@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/home.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <form class="habit-form" action="/upload" method="POST" enctype="multipart/form-data">
+            <div class="labelContainer">
+                <div class="label">File Name</div>
+
+                <input type="file" name="file" class="habit-details-input" required>
+            </div>
+
+
+            <div class="labelContainer">
+                <button class="addButton" type="submit">Add</button>
+            </div>
+        </form>
+
+        <%=files.originalName%>
+            <%if(files.length>0){%>
+
+                <% for(file of files){ %>
+
+                    <div class="listContainer">
+                        <div class="habitRow">
+                            <div class="habitDsc">
+                                <a class="habitShowAction" href="/show/?file=<%= file.file %>&page=1">
+                                    <div>
+                                        <%=file.originalName%>
+                                    </div>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="/delete/<%= file.file %>"><button>Delete</button></a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <%} %>
+
+                        <%}else{%>
+
+                            <div>
+                                There is No Files in your list.
+                            </div>
+
+                            <%}%>
+    </div>
+
+</body>
+
+</html>
+
+<!-- Importing stylesheet -->
+
+
+
+<!-- Form For Taking Habit List -->

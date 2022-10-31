@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Maven+Pro:wght@800&display=swap");
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: sans-serif; /* Change your font family */
+}
+.container {
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   background-color: green;
+   justify-content: center;
+   align-items: center;
+}
+.habit-form {
+    margin-top: 30px;
+   display: flex;
+   flex-direction: column;
+   border: 2px solid black;
+   gap: 30px;
+   height: 100px;
+}
+.labelContainer {
+   display: flex;
+   gap: 30px;
+   justify-content: center;
+   align-items: center;
+}
