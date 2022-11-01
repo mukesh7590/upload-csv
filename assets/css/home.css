@@ -1,6 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Maven+Pro:wght@800&display=swap");
 
+
+.main{
+   height: 100vh;
+   width: 100vw;
+   display: flex;
+   justify-content: center;
+   background-color: #800020;
+   font-family: "Maven Pro", sans-serif;
+}
+
+.heading {
+   padding: 20px;
+}
+.headingText {
+   font-size: 2.5rem;
+
+   text-align: center;
+
+   color: white;
+}
+
 * {
    margin: 0;
    padding: 0;
@@ -10,22 +31,73 @@
 .container {
    display: flex;
    flex-direction: column;
-   width: 100%;
-   background-color: green;
+   border: 2x solid black;
+   width: 60%;
+   background: #1abc9c;
    justify-content: center;
+   height: 100vh;
    align-items: center;
 }
 .habit-form {
-    margin-top: 30px;
    display: flex;
    flex-direction: column;
-   border: 2px solid black;
-   gap: 30px;
-   height: 100px;
+   align-items: center;
+   background-color: rgb(250, 249, 246);
+   padding: 30px 0px;
+   border-radius: 8px;
+   box-shadow: 20px 20px 40px rgba(60, 60, 150, 0.5);
+   width: 30rem;
+}
+#fileInput {
+   width: 80%;
+   border-radius: 8px;
+   box-shadow: 20px 20px 40px rgba(60, 60, 150, 0.25);
 }
 .labelContainer {
    display: flex;
    gap: 30px;
    justify-content: center;
    align-items: center;
+
+   margin-top: 25px;
+}
+
+/* //List to display */
+
+.listContainer {
+   margin-top: 20px;
+   display: flex;
+   flex-direction: column;
+   width: 90%;
+   display: flex;
+   flex-direction: column;
+   height: 100%;
+   gap: 10px;
+}
+
+.fileListRow {
+   margin-top: 20px;
+   display: flex;
+
+   align-content: center;
+   width: 100%;
+
+   /* // align-items: center; */
+   border-radius: 8px;
+   box-shadow: 20px 20px 40px rgba(60, 60, 150, 0.25);
+
+   justify-content: space-between;
+   padding: 10px 25px;
+   /* // padding-right: 10px; */
+
+   background-color: rgb(250, 249, 246);
+}
+.habitDsc {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-left: 15px;
+   font-size: 0.9rem;
+   margin-top: 5px;
+   margin-bottom: 5px;
 }

@@ -7,13 +7,23 @@
    box-sizing: border-box;
    font-family: sans-serif; /* Change your font family */
 }
+
+.heading {
+   padding: 20px;
+}
+.headingText {
+   font-size: 2.5rem;
+
+   text-align: center;
+
+   color: green;
+}
 #filePage {
    display: flex;
+   /* background-color: #2F4F4F; */
    flex-direction: column;
    align-items: center;
-}
-#search-box {
-   padding-top: 20px;
+   gap: 10px;
 }
 
 .container {
@@ -26,13 +36,14 @@
    margin: 25px 0;
    font-size: 0.9em;
    min-width: 400px;
+   
    border-radius: 5px 5px 0 0;
    overflow: hidden;
    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 #sortTable thead {
-   align-items: center; 
+   align-items: center;
    justify-content: center;
 }
 
