@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="/css/file.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
@@ -45,7 +48,10 @@
 
                         <%for(let i=0; i<head.length; i++){%>
                             <th>
-                                <%= head[i]%>
+                                <div class="headRowHeading">
+                                    <%= head[i]%>
+                                        <i class="fa-solid "></i>
+                                </div>
                             </th>
 
                             <%}%>
@@ -77,10 +83,10 @@
 
         <nav id="pagingNav" aria-label="Page navigation example">
             <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="/show/?file=<%= file.file %>&page=1">First</a></li>
+                <li class="page-item"><a class="page-link" href="/show/?file_id=<%= file._id %>&page=1">First</a></li>
                 <li class="page-item">
                     <%if(page!=1){%>
-                        <a class="page-link" href="/show/?file=<%= file.file %>&page=<%=page-1%>">
+                        <a class="page-link" href="/show/?file_id=<%= file._id %>&page=<%=page-1%>">
                             <%=page-1%>
                         </a>
                         <%}%>
@@ -92,7 +98,7 @@
 
                 <li class="page-item">
                     <%if(page!=totalPages){%>
-                        <a class="page-link" href="/show/?file=<%= file.file %>&page=<%=++page%>">
+                        <a class="page-link" href="/show/?file_id=<%= file._id %>&page=<%=++page%>">
                             <%=page%>
                         </a>
                         <%}%>
@@ -100,7 +106,7 @@
 
                 <li class="page-item">
 
-                    <a class="page-link" href="/show/?file=<%= file.file %>&page=<%=totalPages%>">
+                    <a class="page-link" href="/show/?file_id=<%= file._id %>&page=<%=totalPages%>">
                         Last
                     </a>
 
@@ -118,9 +124,6 @@
             filter = input.value.toUpperCase();
             table = document.getElementById("sortTable");
             tr = table.getElementsByTagName("tr");
-            // console.log(tr, filter, table)
-
-
             var e = document.getElementById("opt");
             var value = e.value;
             var text = e.options[e.selectedIndex].text;
@@ -144,6 +147,97 @@
 
             }
         }
+
+
+        // Sorting code here
+
+        const table = document.getElementById('sortTable');
+        const headers = table.querySelectorAll('th');
+        const rows = table.querySelectorAll('tr');
+
+        headers.forEach((header, headerIndex) => {
+            header.addEventListener('click', () => {
+                sortColumn(headerIndex);
+            });
+        });
+
+        // Transform the content of given cell in given column
+        const transform = function (index, content) {
+            // Get the data type of column
+            const type = headers[index].getAttribute('type');
+            switch (type) {
+                case 'number':
+                    return parseFloat(content);
+                case 'string':
+                default:
+                    return content;
+            }
+        };
+
+        // Track sort directions
+        let directions = Array(headers.length).fill("");
+        console.log(directions);
+
+        function sortColumn(headerIndex) {
+
+            //Check the direction asc or desc
+            const direction = directions[headerIndex] || 'asc';
+            const multiplier = (direction == 'asc') ? 1 : -1;
+            changeIcon(direction, headerIndex);
+            //lets make new instance of rows
+            let arrayRows = Array.from(rows);
+            arrayRows.shift();//Exclude header
+
+            let newRows = Array.from(arrayRows);
+            newRows.sort(function (rowA, rowB) {
+                //Get the content of cells
+                const cellA = rowA.querySelectorAll('td')[headerIndex].innerHTML;
+                const cellB = rowB.querySelectorAll('td')[headerIndex].innerHTML;
+                let a = transform(headerIndex, cellA);
+                let b = transform(headerIndex, cellB);
+
+                if (a > b)
+                    return 1 * multiplier;
+                else if (a < b)
+                    return -1 * multiplier;
+                else
+                    return 0;
+            });
+            //Remove old rows
+            let tbody = document.getElementsByTagName("tbody");
+            rows.forEach((row, index) => {
+                if (index != 0)
+                    tbody[0].removeChild(row);
+            });
+            //Append new row
+            newRows.forEach((newRow) => {
+                tbody[0].appendChild(newRow);
+            });
+
+            // Reverse the direction
+            directions[headerIndex] = direction === 'asc' ? 'desc' : 'asc';
+            // console.log(directions);
+        }
+
+        function changeIcon(direction, index) {
+            // inactive all icons
+            for (let i = 0; i < headers.length; i++) {
+                headers[i].childNodes[1].className = '';//Removing all classes
+            }
+
+            let className;
+            if (direction == "desc") {
+                //headers[index].childNodes[1].classList.add('fa-solid','fa-caret-down','active');
+                headers[index].childNodes[1].className = ('fa-solid fa-caret-down active');
+            } else {
+                //headers[index].childNodes[1].classList.add('fa-solid','fa-caret-up','active');
+                headers[index].childNodes[1].className = ('fa-solid fa-caret-up active');
+            }
+        }
+
+
+
+
     </script>
 </body>
 

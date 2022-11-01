@@ -7,6 +7,15 @@
    box-sizing: border-box;
    font-family: sans-serif; /* Change your font family */
 }
+.headRowHeading{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+svg {
+   height: 15px;
+   width: 15px;
+}
 
 .heading {
    padding: 20px;
@@ -70,11 +79,4 @@
 
 #sortTable tbody tr:last-of-type {
    border-bottom: 2px solid #009879;
-}
-th i {
-   margin-left: 1px;
-   visibility: hidden;
-}
-th .active {
-   visibility: visible;
 }

@@ -90,7 +90,7 @@ const fileDelete = asyncHandler(async (req, res) => {
 const showFile = asyncHandler(async (req, res) => {
    console.log("\n\n\t\t Show Files ");
    console.log(req.params.file);
-   let filePATH = await File.findOne({ file: req.query.file });
+   let filePATH = await File.findById(req.query.file_id);
 
    console.log(filePATH);
    console.log(filePATH.filePath);

@@ -27,8 +27,7 @@
                 <div id="fileInput" class="mb-3" style="background-color: #0066b2;">
                     <label for="formFileSm" class="form-label"
                         style="color: white; font-size: 1rem; margin: 10px 20px;">Upload File</label>
-                    <input class="form-control form-control-sm" id="formFileSm" type="file"
-                        placeholder="Upload your CSV file"
+                    <input name="file" id="formFileSm" type="file" placeholder="Upload your CSV file"
                         style="color: white; font-size: 1rem; margin: 20px 20px;width: 85%;">
                 </div>
 
@@ -46,9 +45,9 @@
                             <div class="fileListRow">
                                 <div class="habitDsc">
                                     <a style="text-decoration: none;" class="habitShowAction"
-                                        href="/show/?file=<%= file.file %>&page=1">
-
-                                        <%=file.originalName%>
+                                        href="/show/?file_id=<%= file._id %>&page=1">
+                                        <%=file._id%>
+                                            <%=file.originalName%>
 
                                     </a>
                                 </div>
@@ -66,8 +65,8 @@
 
                             <%}else{%>
 
-                                <div>
-                                    There is No Files in your list.
+                                <div style="margin-top: 50px; color: whitesmoke;">
+                                    <h3>There is No Files in your list.</h3>
                                 </div>
 
                                 <%}%>
