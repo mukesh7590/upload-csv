@@ -7,10 +7,16 @@ const {
    showFile,
 } = require("../controller/fileController");
 
-// For rendering different pages and controllers
+// HOME PAGE
 router.get("/", home);
+
+// UPLOAD THR CSV FILE
 router.post("/upload", uploadFile);
+
+// DELETE A CSV FILE
 router.get("/delete/:file", fileDelete);
+
+// SHOW THE CSV FILE
 router.get("/show", showFile);
 
 module.exports = router;

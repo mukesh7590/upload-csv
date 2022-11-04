@@ -8,6 +8,7 @@ const FILES_PATH = path.join("/uploads/files");
 
 const asyncHandler = require("express-async-handler");
 
+// HOME 
 const home = asyncHandler(async (req, res) => {
    try {
       let files = await File.find({});
@@ -19,6 +20,7 @@ const home = asyncHandler(async (req, res) => {
    }
 });
 
+// UPLOADING THE FILE
 const uploadFile = asyncHandler(async (req, res) => {
    /**********EXPORTING FUNCTION FOR Uploading ROUTE******************/
    try {
@@ -66,6 +68,7 @@ const uploadFile = asyncHandler(async (req, res) => {
    }
 });
 
+// DELETING THE FILE
 const fileDelete = asyncHandler(async (req, res) => {
    try {
       const filename = req.params.file;
@@ -87,17 +90,15 @@ const fileDelete = asyncHandler(async (req, res) => {
    }
 });
 
+// SHOWING THE FILE
 const showFile = asyncHandler(async (req, res) => {
-   console.log("\n\n\t\t Show Files ");
-   console.log(req.params.file);
+   // FIND THE FILE BY ID
    let filePATH = await File.findById(req.query.file_id);
-
-   console.log(filePATH);
-   console.log(filePATH.filePath);
 
    const results = [];
    const header = [];
 
+   // STREAMING THE FILE
    fs.createReadStream(filePATH.filePath)
       .pipe(csv())
       .on("headers", (headers) => {
@@ -133,4 +134,5 @@ const showFile = asyncHandler(async (req, res) => {
       });
 });
 
+// EXPORTING THE ALL ACTIONS
 module.exports = { home, uploadFile, fileDelete, showFile };
